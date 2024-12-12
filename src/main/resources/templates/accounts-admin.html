@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trang chủ</title>
+  <link rel="shortcut icon" type="image/png" th:href="@{/img/logo.png}" />
+  <link rel="stylesheet" th:href="@{/assets/css/styles.min.css}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+  <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
+  <link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
+  <link rel="stylesheet" th:href="@{/css/flaticon.css}" type="text/css">
+  <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
+  <link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+  <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" type="text/css">
+  <link rel="stylesheet" th:href="@{/css/magnific-popup.css}" type="text/css">
+  <link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
+  <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+</head>
+
+<body>
+
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <aside class="left-sidebar">
+      <div>
+        <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="/admin/users" class="text-nowrap logo-img">
+            <img src="/img/logo.png" width="180" alt="" />
+          </a>
+          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+            <i class="ti ti-x fs-8"></i>
+          </div>
+        </div>
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+          <ul id="sidebarnav">
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/admin/rooms" aria-expanded="">
+                <span>
+                    <i class="fa-solid fa-bed"></i>
+                </span>
+                <span class="hide-menu">Quản lý phòng</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/admin/services" aria-expanded="false">
+                <span>
+                  <i class="ti ti-alert-circle"></i>
+                </span>
+                <span class="hide-menu">Quản lý dịch vụ</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link sidebar-item-active" href="/admin/users" aria-expanded="false">
+                <span>
+                    <i class="fa-solid fa-user-gear"></i>
+                </span>
+                <span class="hide-menu">Quản lý tài khoản</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/admin/bookings" aria-expanded="false">
+                <span>
+                    <i class="fa-solid fa-user-gear"></i>
+                </span>
+                <span class="hide-menu">Quản lý đặt phòng</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="/login" aria-expanded="false">
+                  <span>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  </span>
+                  <span class="hide-menu">Đăng xuất</span>
+                </a>
+              </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+    <div class="body-wrapper">
+      <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <ul class="navbar-nav">
+                <li class="nav-item d-block d-xl-none">
+                  <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse">
+                    <i class="ti ti-menu-2"></i>
+                  </a>
+                </li>
+              </ul>
+              <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                 <a href="/admin/users/create" class = "booking-btn">Thêm tài khoản</a>
+                </ul>
+              </div>
+        </nav>
+      </header>
+      <div class="container-fluid">
+        <section class="rooms-section spad">
+          <div class="container">
+            <div class="row">
+              <table class="table table-bordered m-0">
+                <thead>
+                <tr>
+                  <th class="text-center py-3 px-4">Username</th>
+                  <th class="text-center py-3 px-4">Email</th>
+                  <th class="text-center py-3 px-4">Roles</th>
+                  <th class="text-center py-3 px-4">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                  <td class="text-center align-middle p-4" th:text="${user.username}"></td>
+                  <td class="text-center align-middle p-4" th:text="${user.email}"></td>
+                  <td class="text-center align-middle p-4" th:text="${user.roles}"></td>
+                  <td class="text-center align-middle p-4">
+                    <a th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="btn btn-primary">Edit</a>
+                    <a th:href="@{/admin/users/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
+  <script th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/js/sidebarmenu.js}"></script>
+  <script th:src="@{/assets/js/app.min.js}"></script>
+  <script th:src="@{/assets/libs/apexcharts/dist/apexcharts.min.js}"></script>
+  <script th:src="@{/assets/libs/simplebar/dist/simplebar.js}"></script>
+  <script th:src="@{/assets/js/dashboard.js}"></script>
+</body>
+
+</html>
